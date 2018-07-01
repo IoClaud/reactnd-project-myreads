@@ -16,10 +16,8 @@ class ListCategories extends Component {
                   {this.props.books.filter(book => book.category === category.id).map((book) => (
                     <li key = {book.id}>
                       <ListBooks
-
                         book = {book}
                         onChangeCategory={this.props.onChangeCategory}
-
                       />
                     </li>
                   ))}
