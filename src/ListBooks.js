@@ -21,9 +21,11 @@ class ListBooks extends Component {
                     <div className="book">
                       <div className="book-top">
                         <div className="book-cover" style={{
+                          width: `${book.width}`+'px',
+                          height: `${book.height}`+'px',
                           backgroundImage: `url(${book.thumbnail})`
-                        }}>
-                        </div>
+                        }}/>
+
                         <div className="book-shelf-changer">
                           <select>
                             <option value="move" disabled>Move to...</option>
