@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ListBooks from './ListBooks'
 
 class ListCategories extends Component {
+
   render() {
     console.log('ListCategories',this.props)
     return (
@@ -14,8 +15,10 @@ class ListCategories extends Component {
                   {this.props.books.filter(book => book.category === category.id).map((book) => (
                     <li key = {book.id}>
                       <ListBooks
-                        books = {this.props.books}
+
                         book = {book}
+                        onChangeCategory={this.props.onChangeCategory}
+
                       />
                     </li>
                   ))}

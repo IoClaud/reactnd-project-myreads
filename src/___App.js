@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-//import * as BooksAPI from './BooksAPI'
+// import * as BooksAPI from './BooksAPI'
 import ListCategories from './ListCategories'
 import './App.css'
 
@@ -94,15 +94,6 @@ class BooksApp extends Component {
     ]
   }
 
-  changeCategory = (book, category) => {
-    if (this.state.books) {
-      book.category = category;
-      this.setState(state => ({
-          books: state.books.filter(b => b.id !== book.id).concat([book])
-      }))
-    }
-  }
-
   render() {
     return (
       <div className="app">
@@ -135,7 +126,6 @@ class BooksApp extends Component {
               </div>
               <div className="list-books-content">
                 <ListCategories
-                  onChangeCategory={this.changeCategory}
                   categories = {this.state.categories}
                   books = {this.state.books}
                 />

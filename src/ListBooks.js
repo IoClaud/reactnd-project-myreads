@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 class ListBooks extends Component {
   render() {
     //console.log('Props', this.props)
-    const {book} = this.props
+    const {book, onChangeCategory} = this.props
     return (
       <div className="book">
         <div className="book-top">
@@ -14,12 +14,12 @@ class ListBooks extends Component {
           }}/>
 
           <div className="book-shelf-changer">
-            <select>
+            <select defaultValue={book.category} onChange={(event) => onChangeCategory(book, event.target.value)}>
               <option value="move" disabled>Move to...</option>
-              <option value="currentlyReading">Currently Reading</option>
-              <option value="wantToRead">Want to Read</option>
-              <option value="read">Read</option>
-              <option value="none">None</option>
+              <option value="CurrentlyReading">Currently Reading</option>
+              <option value="WantToRead">Want to Read</option>
+              <option value="Read">Read</option>
+              <option value="None">None</option>
             </select>
           </div>
         </div>
