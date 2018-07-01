@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import ListBooks from './ListBooks'
 
 class ListCategories extends Component {
@@ -31,4 +32,9 @@ class ListCategories extends Component {
   }
 }
 
+ListCategories.propTypes = {
+  books: PropTypes.array.isRequired,
+  categories: PropTypes.array.isRequired,
+  onChangeCategory: PropTypes.func.isRequired
+}
 export default ListCategories
