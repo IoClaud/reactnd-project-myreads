@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { BrowserRouter, Route, Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import ListCategories from './ListCategories'
 import SearchBooks from './SearchBooks'
@@ -6,14 +7,6 @@ import './App.css'
 
 class BooksApp extends Component {
   state = {
-    /**
-     * TODO: Instead of using this state variable to keep track of which page
-     * we're on, use the URL in the browser's address bar. This will ensure that
-     * users can use the browser's back and forward buttons to navigate between
-     * pages, as well as provide a good URL they can bookmark and share.
-     */
-    showSearchPage: false,
-
     books : [],
     categories: [
         {
@@ -54,34 +47,49 @@ class BooksApp extends Component {
     //console.log(books)
 
     return (
-      <div className="app">
-        {this.state.showSearchPage ? (
-          <div>
-            <SearchBooks
-              books = {books}
-              onChangeCategory = {this.changeCategory}
+      <BrowserRouter>
+        <div className="app">
+
+
+
+
+
+            <Route exact path='/' render={(history) => (
+                <div className="list-books">
+                  <div className="list-books-title">
+                    <h1>MyReads</h1>
+                  </div>
+                  <div className="list-books-content">
+                    <ListCategories
+                      onChangeCategory={this.changeCategory}
+                      categories = {categories}
+                      books = {books}
+                    />
+                  </div>
+                </div>
+              )}
             />
+
+            <Route path="/search" render={(history) => (
+                <div>
+                  <SearchBooks
+                    
+                    onChangeCategory = {this.changeCategory}
+                  />
+                </div>
+              )}
+            />
+
+
+
+          <div className="open-search">
+            <Link to="/search">
+              Add a book
+            </Link>
           </div>
-        ) : (
-          <div>
-            <div className="list-books">
-              <div className="list-books-title">
-                <h1>MyReads</h1>
-              </div>
-              <div className="list-books-content">
-                <ListCategories
-                  onChangeCategory={this.changeCategory}
-                  categories = {categories}
-                  books = {books}
-                />
-              </div>
-            </div>
-            <div className="open-search">
-              <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
-            </div>
-          </div>
-        )}
-      </div>
+
+        </div>
+      </BrowserRouter>
     )
   }
 }

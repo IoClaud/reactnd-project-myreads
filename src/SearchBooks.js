@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import * as BooksAPI from './BooksAPI'
 import ListBooks from './ListBooks'
@@ -10,7 +11,7 @@ class SearchBooks extends Component {
   }
 
   updateQuery = (query) => {
-    this.setState({ query: query.trim() })
+    this.setState({ query })
     if(query){
       BooksAPI.search(query).then((books) => {
           if(books instanceof Array)  {
@@ -32,7 +33,7 @@ class SearchBooks extends Component {
     return (
       <div className="search-books">
         <div className="search-books-bar">
-          <a className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</a>
+          <Link className="close-search" to="/">Close</Link>
           <form>
             <div className="search-books-input-wrapper">
               <input
