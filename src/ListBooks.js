@@ -8,27 +8,29 @@ class ListBooks extends Component {
     return (
       <div className="book">
         <div className="book-top">
-          <div className="book-cover" style={{
-            width: `${book.width}`+'px',
-            height: `${book.height}`+'px',
-            backgroundImage: `url(${book.thumbnail})`
-          }}/>
-
+          {book.imageLinks &&
+            <div className="book-cover" style={{
+              backgroundImage: `url(${book.imageLinks.thumbnail})`
+            }}/>}
           <div className="book-shelf-changer">
-            <select defaultValue={book.category} onChange={(event) => onChangeCategory(book, event.target.value)}>
+            <select defaultValue={book.shelf} onChange={(event) => onChangeCategory(book, event.target.value)}>
               <option value="move" disabled>Move to...</option>
-              <option value="CurrentlyReading">Currently Reading</option>
-              <option value="WantToRead">Want to Read</option>
-              <option value="Read">Read</option>
-              <option value="None">None</option>
+              <option value="currentlyReading">Currently Reading</option>
+              <option value="wantToRead">Want to Read</option>
+              <option value="read">Read</option>
+              <option value="none">None</option>
             </select>
           </div>
         </div>
-        <div className="book-title">{book.title}</div>
-        <div className="book-authors">{book.author}</div>
+        {book.title && <div className="book-title">
+          {book.title}
+          </div>
+        }
+        {book.authors && <div className="book-authors">
+          {book.authors}
+          </div>
+        }
       </div>
-
-
     )
   }
 }
