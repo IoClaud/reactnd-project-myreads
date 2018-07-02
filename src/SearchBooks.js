@@ -1,35 +1,38 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ListBooks from './ListBooks'
-import escapeRegExp from 'escape-string-regexp'
-import sortBy from 'sort-by'
+import * as BooksAPI from './BooksAPI'
+//import escapeRegExp from 'escape-string-regexp'
+//import sortBy from 'sort-by'
 
 class SearchBooks extends Component {
   state = {
-    query: ''
+    query: '',
+    books: []
   }
 
   updateQuery = (query) => {
-    this.setState({ query: query.trim() })
+    this.setState({ query })
+      if (query) {
+        BooksAPI.search(query).then((books) => {
+          if(books instanceof Array)  {
+              //add books to state
+              this.setState({books})
+          }
+          else {
+              //set book state to empty array
+              this.setState({books: []})
+          }
+        })
+      }
   }
 
   render() {
-    const {books, onChangeCategory} = this.props
-    const {query} = this.state
+    const {onChangeCategory} = this.props
+    const {query, books} = this.state
 
 
-    let showingBooks
 
-    if (query) {
-      const match = new RegExp(escapeRegExp(query), 'i')
-      showingBooks = books.filter((book) =>
-        match.test(book.title)
-      )
-    } else {
-      showingBooks = books
-    }
-
-    showingBooks.sort(sortBy('title'))
 
     return (
       <div className="search-books">
@@ -46,18 +49,25 @@ class SearchBooks extends Component {
             </div>
           </form>
         </div>
-        <div className="search-books-results">
-          <ol className="books-grid">
-            {showingBooks.map((book) => (
-              <li key = {book.id}>
-                <ListBooks
-                  book = {book}
-                  onChangeCategory={onChangeCategory}
-                />
-              </li>
-            ))}
-          </ol>
-        </div>
+        {books.length!==0 &&
+          <div className="search-books-results">
+            <ol className="books-grid">
+              {books.map((book) => (
+                <li key = {book.id}>
+                  <ListBooks
+                    book = {book}
+                    onChangeCategory={onChangeCategory}
+                  />
+                </li>
+              ))}
+            </ol>
+          </div>
+        }
+        {(books.length===0 && query.length!==0) && (
+        <div className="search-results">
+             {`No book found`}
+         </div>
+        )}
       </div>
     )
   }
