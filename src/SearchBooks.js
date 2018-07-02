@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import ListBooks from './ListBooks'
 import * as BooksAPI from './BooksAPI'
-//import escapeRegExp from 'escape-string-regexp'
-//import sortBy from 'sort-by'
+import ListBooks from './ListBooks'
 
 class SearchBooks extends Component {
   state = {
@@ -12,28 +10,25 @@ class SearchBooks extends Component {
   }
 
   updateQuery = (query) => {
-    this.setState({ query })
-      if (query) {
-        BooksAPI.search(query).then((books) => {
+    this.setState({ query: query.trim() })
+    if(query){
+      BooksAPI.search(query).then((books) => {
           if(books instanceof Array)  {
-              //add books to state
-              this.setState({books})
+            this.setState({books})
           }
           else {
-              //set book state to empty array
-              this.setState({books: []})
+            this.setState({books: []})
           }
-        })
-      }
+        }
+      )
+    }
   }
 
   render() {
     const {onChangeCategory} = this.props
     const {query, books} = this.state
 
-
-
-
+    console.log(typeof books)
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -49,25 +44,18 @@ class SearchBooks extends Component {
             </div>
           </form>
         </div>
-        {books.length!==0 &&
-          <div className="search-books-results">
-            <ol className="books-grid">
-              {books.map((book) => (
-                <li key = {book.id}>
-                  <ListBooks
-                    book = {book}
-                    onChangeCategory={onChangeCategory}
-                  />
-                </li>
-              ))}
-            </ol>
-          </div>
-        }
-        {(books.length===0 && query.length!==0) && (
-        <div className="search-results">
-             {`No book found`}
-         </div>
-        )}
+        <div className="search-books-results">
+          <ol className="books-grid">
+            {books.map((book) => (
+              <li key = {book.id}>
+                <ListBooks
+                  book = {book}
+                  onChangeCategory={onChangeCategory}
+                />
+              </li>
+            ))}
+          </ol>
+        </div>
       </div>
     )
   }

@@ -51,7 +51,7 @@ class BooksApp extends Component {
   render() {
     const {books, categories} = this.state
 
-    console.log(books)
+    //console.log(books)
 
     return (
       <div className="app">
