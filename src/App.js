@@ -44,52 +44,43 @@ class BooksApp extends Component {
   render() {
     const {books, categories} = this.state
 
-    //console.log(books)
-
     return (
-      <BrowserRouter>
-        <div className="app">
+      <div className="app">
 
-
-
-
-
-            <Route exact path='/' render={() => (
-                <div className="list-books">
-                  <div className="list-books-title">
-                    <h1>MyReads</h1>
-                  </div>
-                  <div className="list-books-content">
-                    <ListCategories
-                      onChangeCategory={this.changeCategory}
-                      categories = {categories}
-                      books = {books}
-                    />
-                  </div>
+          <Route exact path='/' render={() => (
+              <div className="list-books">
+                <div className="list-books-title">
+                  <h1>MyReads</h1>
                 </div>
-              )}
-            />
-
-            <Route path="/search" render={(history) => (
-                <div>
-                  <SearchBooks
-
-                    onChangeCategory = {this.changeCategory}
+                <div className="list-books-content">
+                  <ListCategories
+                    onChangeCategory={this.changeCategory}
+                    categories = {categories}
+                    books = {books}
                   />
                 </div>
-              )}
-            />
+              </div>
+            )}
+          />
 
+          <Route path="/search" render={(history) => (
+              <div>
+                <SearchBooks
 
+                  onChangeCategory = {this.changeCategory}
+                />
+              </div>
+            )}
+          />
 
-          <div className="open-search">
-            <Link to="/search">
-              Add a book
-            </Link>
-          </div>
-
+        <div className="open-search">
+          <Link to="/search">
+            Add a book
+          </Link>
         </div>
-      </BrowserRouter>
+
+      </div>
+
     )
   }
 }
