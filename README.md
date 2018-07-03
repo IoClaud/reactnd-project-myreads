@@ -25,8 +25,6 @@ You can change the category of book by the select list with all categories.
 
 3. Start the development server with `npm start`
 
-That's it! Now you can use MyReads :)
-
 
 ## REQUIREMENTS
 
