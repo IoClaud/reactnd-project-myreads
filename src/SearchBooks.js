@@ -34,7 +34,7 @@ class SearchBooks extends Component {
 
         <div className="search-books-bar">
           <Link className="close-search" to="/">Close</Link>
-          <form onSubmit={(event) => event.preventDefault()}>
+          <form className="search-form" onSubmit={(event) => event.preventDefault()}>
             <div className="search-books-input-wrapper">
               <input
                 type="text"
@@ -46,16 +46,18 @@ class SearchBooks extends Component {
           </form>
         </div>
         <div className="search-books-results">
-          <ol className="books-grid">
-            {books.map((book) => (
-              <li key = {book.id}>
-                <ListBooks
-                  book = {book}
-                  onChangeCategory={onChangeCategory}
-                />
-              </li>
-            ))}
-          </ol>
+          {books.length!==0 && (
+            <ol className="books-grid">
+              {books.map((book) => (
+                <li key = {book.id}>
+                  <ListBooks
+                    book = {book}
+                    onChangeCategory={onChangeCategory}
+                  />
+                </li>
+              ))}
+            </ol>
+          )}
         </div>
       </div>
     )
