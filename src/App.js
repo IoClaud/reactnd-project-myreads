@@ -54,7 +54,7 @@ class BooksApp extends Component {
 
 
 
-            <Route exact path='/' render={(history) => (
+            <Route exact path='/' render={() => (
                 <div className="list-books">
                   <div className="list-books-title">
                     <h1>MyReads</h1>
@@ -73,7 +73,7 @@ class BooksApp extends Component {
             <Route path="/search" render={(history) => (
                 <div>
                   <SearchBooks
-                    
+
                     onChangeCategory = {this.changeCategory}
                   />
                 </div>

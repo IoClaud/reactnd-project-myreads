@@ -29,12 +29,12 @@ class SearchBooks extends Component {
     const {onChangeCategory} = this.props
     const {query, books} = this.state
 
-    console.log(typeof books)
     return (
       <div className="search-books">
+
         <div className="search-books-bar">
           <Link className="close-search" to="/">Close</Link>
-          <form>
+          <form onSubmit={(event) => event.preventDefault()}>
             <div className="search-books-input-wrapper">
               <input
                 type="text"

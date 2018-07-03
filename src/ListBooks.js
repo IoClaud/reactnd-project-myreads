@@ -7,13 +7,14 @@ class ListBooks extends Component {
     const {book, onChangeCategory} = this.props
     return (
       <div className="book">
+      {console.log(book)}
         <div className="book-top">
           {book.imageLinks &&
             <div className="book-cover" style={{
               backgroundImage: `url(${book.imageLinks.thumbnail})`
             }}/>}
           <div className="book-shelf-changer">
-            <select defaultValue={book.shelf} onChange={(event) => onChangeCategory(book, event.target.value)}>
+            <select defaultValue= {book.shelf ? book.shelf : "none"} onChange={(event) => onChangeCategory(book, event.target.value)}>
               <option value="move" disabled>Move to...</option>
               <option value="currentlyReading">Currently Reading</option>
               <option value="wantToRead">Want to Read</option>
