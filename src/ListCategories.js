@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import sortBy from 'sort-by'
 import ListBooks from './ListBooks'
 
 class ListCategories extends Component {
@@ -13,7 +14,7 @@ class ListCategories extends Component {
               <h2 className="bookshelf-title">{category.title}</h2>
               <div className="bookshelf-books">
                 <ol className="books-grid">
-                  {this.props.books.filter(book => book.shelf === category.id).map((book) => (
+                  {this.props.books.sort(sortBy('title')).filter(book => book.shelf === category.id).map((book) => (
                     <li key = {book.id}>
                       <ListBooks
                         book = {book}

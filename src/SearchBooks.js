@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import * as BooksAPI from './BooksAPI'
+import sortBy from 'sort-by'
 import ListBooks from './ListBooks'
 
 class SearchBooks extends Component {
@@ -48,7 +49,7 @@ class SearchBooks extends Component {
         <div className="search-books-results">
           {books.length!==0 && (
             <ol className="books-grid">
-              {books.map((book) => (
+              {books.sort(sortBy('title')).map((book) => (
                 <li key = {book.id}>
                   <ListBooks
                     book = {book}
