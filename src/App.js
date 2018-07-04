@@ -75,6 +75,7 @@ class BooksApp extends Component {
             <Route path="/search" render={(history) => (
                 <div>
                   <SearchBooks
+                    booksShelf = {books}
                     onChangeCategory = {this.changeCategory}
                   />
                 </div>

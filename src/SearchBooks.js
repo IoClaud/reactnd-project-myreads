@@ -12,17 +12,17 @@ class SearchBooks extends Component {
   }
 
   updateQuery = (query) => {
-    this.setState({ query })
-    if(query){
+    if (!query) {
+      this.setState({query: '', books: []})
+    } else {
+      this.setState({ query: query.trim() })
       BooksAPI.search(query).then((books) => {
-          if(books instanceof Array)  {
-            this.setState({books})
-          }
-          else {
-            this.setState({books: []})
-          }
+        if (books.error) {
+          books = []
         }
-      )
+        books.map(book => (this.props.booksShelf.filter((b) => b.id === book.id).map(b => book.shelf = b.shelf)))
+        this.setState({books})
+      })
     }
   }
 
@@ -66,7 +66,7 @@ class SearchBooks extends Component {
 }
 
 SearchBooks.propTypes = {
-  book: PropTypes.object,
+  booksShelf: PropTypes.object,
   onChangeCategory: PropTypes.func.isRequired
 }
 
