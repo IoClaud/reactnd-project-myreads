@@ -9,10 +9,10 @@ class ListBooks extends Component {
       <div className="book">
       {console.log(book)}
         <div className="book-top">
-          {book.imageLinks &&
+
             <div className="book-cover" style={{
-              backgroundImage: `url(${book.imageLinks.thumbnail})`
-            }}/>}
+              backgroundImage: `url(${book.imageLinks !== undefined ? book.imageLinks.thumbnail: 'http://via.placeholder.com/128x193?text=No%20Cover'})`
+            }}/>
           <div className="book-shelf-changer">
             <select defaultValue= {book.shelf ? book.shelf : "none"} onChange={(event) => onChangeCategory(book, event.target.value)}>
               <option value="move" disabled>Move to...</option>
@@ -28,7 +28,7 @@ class ListBooks extends Component {
           </div>
         }
         {book.authors && <div className="book-authors">
-          {book.authors}
+          {book.authors ? book.authors.join(', ') : ''}
           </div>
         }
       </div>
