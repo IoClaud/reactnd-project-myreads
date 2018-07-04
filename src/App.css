@@ -178,3 +178,32 @@ body, .app {
   text-align: center;
   font-size: 0.8em;
 }
+
+.error-page-wrapper {
+  max-width: 1200px;
+  height: 100vh;
+  margin: 0 auto;
+  position: relative;
+  background-image: url('./icons/hand.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  font-weight: bold;
+}
+
+.error-page-content {
+  width: 60%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 5%;
+}
+
+.error-page-content h1 {
+  margin: 0;
+}
+
+.error-page-content p {
+  font-size: 235px;
+  margin: 0;
+}
