@@ -12,9 +12,7 @@ class SearchBooks extends Component {
   }
 
   updateQuery = (query) => {
-    if (!query) {
-      this.setState({query: '', books: []})
-    } else {
+    if (query) {
       this.setState({ query: query.trim() })
       BooksAPI.search(query).then((books) => {
         if (books.error) {
@@ -23,6 +21,8 @@ class SearchBooks extends Component {
         books.map(book => (this.props.booksShelf.filter((b) => b.id === book.id).map(b => book.shelf = b.shelf)))
         this.setState({books})
       })
+    } else {
+      this.setState({query: '', books: []})
     }
   }
 
@@ -32,7 +32,6 @@ class SearchBooks extends Component {
 
     return (
       <div className="search-books">
-
         <div className="search-books-bar">
           <Link className="close-search" to="/">Close</Link>
           <form className="search-form" onSubmit={(event) => event.preventDefault()}>
