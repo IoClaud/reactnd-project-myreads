@@ -12,7 +12,7 @@ class ListBooks extends Component {
             backgroundImage: `url(${book.imageLinks !== undefined ? book.imageLinks.thumbnail: 'http://via.placeholder.com/128x193?text=No%20Cover'})`
           }}/>
           <div className="book-shelf-changer">
-            <select value= {book.shelf ? book.shelf : "none"} ref={book.shelf} onChange={(event) => onChangeCategory(book, event.target.value)}>
+            <select value= {book.shelf ? book.shelf : "none"} refs={book.shelf} onChange={(event) => onChangeCategory(book, event.target.value)}>
               <option value="move" disabled>Move to...</option>
               <option value="currentlyReading">Currently Reading</option>
               <option value="wantToRead">Want to Read</option>

@@ -13,7 +13,7 @@ class SearchBooks extends Component {
 
   updateQuery = (query) => {
     if (query) {
-      this.setState({ query: query.trim() })
+      this.setState({ query })
       BooksAPI.search(query).then((books) => {
         if (books.error) {
           books = []
@@ -46,7 +46,7 @@ class SearchBooks extends Component {
           </form>
         </div>
         <div className="search-books-results">
-          {books.length!==0 && (
+          {books.length!==0 && query && (
             <ol className="books-grid">
               {books.sort(sortBy('title')).map((book) => (
                 <li key = {book.id}>
